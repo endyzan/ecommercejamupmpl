@@ -5,7 +5,7 @@
                <div class="col-lg-4">
                    <div class="section-heading">
                        <h6>PRODUK JAMU</h6>
-                       <h2>Our selection of cakes with quality taste</h2>
+                       <h2>Racikan Jamu Pilihan dengan Kualitas yang Terjaga</h2>
                    </div>
                </div>
            </div>
@@ -17,13 +17,22 @@
                    @foreach ($jamus as $jamu)
                        <div class="item">
                            <div class='card'
-                               style="background-image: url('{{ asset('assets/images/jamu-madura.jpg') }}')">
-                               <div class="price">
+                               style="background-image: url('{{ asset('assets/images/menu-item-01.jpg') }}')">
+                               {{-- <div class="price">
                                    <h6>{{ rupiah($jamu->harga) }}</h6>
                                    @if ($jamu->stok < 1)
                                        <h4>Out Of Stock</h4>
                                    @endif
+                               </div> --}}
+                               <div
+                                   class="absolute top-0 left-0 w-[100px] h-[70px] bg-[#fb5849] text-white text-[14px] font-bold rounded-[3px] flex flex-col items-center justify-center text-center px-1">
+                                   <span class="text-lg">{{ rupiah($jamu->harga) }}</span>
+                                   @if ($jamu->stok < 1)
+                                       <span class="mt-1 text-[10px] bg-white text-[#fb5849] px-1 rounded-sm">Out of
+                                           Stock</span>
+                                   @endif
                                </div>
+
 
                                <div class='info'>
                                    <h1 class='title'>{{ $jamu->nama_jamu }}</h1>

@@ -5,8 +5,8 @@
                 <div class="col-lg-4">
                     <div class="left-content">
                         <div class="inner-content">
-                            <h3>Taneyan Jamu</h3>
-                            <h4>Madura</h4>
+                            <h3>- Produk Jamu Khas Madura -</h3>
+                            <h4>Taneyan Jamu</h4>
                             <div class="main-white-button scroll-to-section">
                                 <a href="#">
                                     <h2>Pesan Jamu</h2>
