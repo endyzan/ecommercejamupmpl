@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use JamuSeeder;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use KategoriJamuSeeder;
+use Database\Seeders\JamuSeeder;
+use Database\Seeders\KategoriJamuSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',
@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KategoriJamuSeeder::class,
             JamuSeeder::class,
+            KomentarSeeder::class,
         ]);
     }
 }

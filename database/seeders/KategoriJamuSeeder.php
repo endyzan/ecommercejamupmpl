@@ -1,21 +1,27 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class KategoriJamuSeeder extends Seeder
 {
-    public function run()
+    /**
+     * Run the database seeds.
+     */
+    public function run(): void
     {
         $jenis = [
-            ['id_jenis' => 1, 'nama_jenis' => 'Kunyit Asam'],
-            ['id_jenis' => 2, 'nama_jenis' => 'Beras Kencur'],
-            ['id_jenis' => 3, 'nama_jenis' => 'Temulawak'],
-            ['id_jenis' => 4, 'nama_jenis' => 'Jahe Merah'],
-            ['id_jenis' => 5, 'nama_jenis' => 'Sinom'],
-            ['id_jenis' => 6, 'nama_jenis' => 'Temu Lawak'],
-            ['id_jenis' => 7, 'nama_jenis' => 'Pahit'],
-            ['id_jenis' => 8, 'nama_jenis' => 'Kencur'],
+            ['id_kategori' => 1, 'nama_kategori' => 'Kunyit Asam'],
+            ['id_kategori' => 2, 'nama_kategori' => 'Beras Kencur'],
+            ['id_kategori' => 3, 'nama_kategori' => 'Temulawak'],
+            ['id_kategori' => 4, 'nama_kategori' => 'Jahe Merah'],
+            ['id_kategori' => 5, 'nama_kategori' => 'Sinom'],
+            ['id_kategori' => 6, 'nama_kategori' => 'Temu Lawak'],
+            ['id_kategori' => 7, 'nama_kategori' => 'Pahit'],
+            ['id_kategori' => 8, 'nama_kategori' => 'Kencur'],
         ];
 
         DB::table('kategori')->insert($jenis);
