@@ -17,10 +17,23 @@ class DatabaseSeeder extends Seeder
     {
         User::factory(10)->create();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Admin
+        User::factory()->create([
+            'name' => 'Admin Taneyan Jamu',
+            'username' => 'admin',
+            'email' => 'admin@example.com',
+            'password' => bcrypt('admin123'),
+            'role' => 1,
+        ]);
+
+        // Manager
+        User::factory()->create([
+            'name' => 'Manager Taneyan Jamu',
+            'username' => 'manager',
+            'email' => 'manager@example.com',
+            'password' => bcrypt('manager123'),
+            'role' => 2,
+        ]);
 
         $this->call([
             KategoriJamuSeeder::class,

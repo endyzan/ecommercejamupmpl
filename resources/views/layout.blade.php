@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/short.jpg') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logos/leaves.jpg') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
         rel="stylesheet">
 
-    <title>Midway Dine - Your Favourite Foods</title>
+    <title>Taneyan Jamu</title>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
@@ -32,6 +32,25 @@
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+        .fixed-logo {
+            bottom: 0 !important;
+            left: 0 !important;
+            /* z-index: 1000; */
+            /* padding-left: 10%; */
+        }
+
+        .animation-easeinout {
+            transition: all 0.8s ease-in-out !important;
+        }
+
+        @media (min-width: 1024px) {
+            .centered_navigation_bar {
+                padding-right: 10% !important;
+            }
+        }
+    </style>
 
 </head>
 
@@ -53,8 +72,8 @@
         <div class="container">
             <nav class="main-nav">
                 <!-- ***** Logo Start ***** -->
-                <a href="{{ url('home') }}" class="logo">
-                    <img width="100px" src="{{ asset('assets/images/logo.png') }}">
+                <a href="/" class="logo fixed-logo h-[80px]">
+                    <img src="{{ asset('assets/images/logos/leaves.jpg') }} " class="max-w-[100px] max-h-full">
                 </a>
                 <!-- ***** Logo End ***** -->
                 <!-- ***** Menu Start ***** -->
@@ -171,8 +190,14 @@
                 </div>
                 <div class="col-lg-4 col-xs-12">
                     <div class="left-text-content">
-                        <p>© Copyright Midway Dine
-                            <br>Since 2022
+                        <p>© Copyright Taneyan Jamu
+                            <br>Since 2025
+                        </p>
+                        <p>© Credit for templates:
+                            <br><a href="https://github.com/SajeebChakraborty">SajeebChakraborty</a>
+                            <br><a
+                                href="https://github.com/SajeebChakraborty/Restaurant_Ecommerce_System_Laravel/tree/master">Midway
+                                Dine 2022</a>
                         </p>
                     </div>
                 </div>
