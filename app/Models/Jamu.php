@@ -22,6 +22,7 @@ class Jamu extends Model
         'stok',
         'manfaat',
         'id_kategori',
+        'fitur_index', // kolom tambahan agar mempercepat proses prediksi
     ];
 
     // Jika 'id_kategori' disimpan dalam bentuk JSON, kamu bisa mengaksesnya sebagai array

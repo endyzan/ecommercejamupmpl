@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->text('manfaat');
             $table->json('id_kategori')->nullable(); // array
+            $table->text('fitur_index')->nullable(); // kolom tambahan agar mempercepat proses prediksi
             $table->timestamps();
         });
     }

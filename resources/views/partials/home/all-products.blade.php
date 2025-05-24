@@ -11,13 +11,19 @@
            </div>
        </div>
        <div class="menu-item-carousel">
-           <div class="col-lg-12">
+           <div class="col-lg-12" style="padding:0 5em 0 5em">
                <div class="owl-menu-item owl-carousel">
 
                    @foreach ($jamus as $jamu)
                        <div class="item">
-                           <div class='card'
-                               style="background-image: url('{{ asset('assets/images/menu-item-01.jpg') }}')">
+                           @php
+                               // Tentukan URL background, Code Untuk Menyesuaikan gambar dengan data dummy atau seeder
+                               $bgUrl = filter_var($jamu->gambar, FILTER_VALIDATE_URL) // Jika pada gambar bukan path gambar lokal, maka gunakan URL langsung
+                                   ? $jamu->gambar
+                                   : asset('assets/images/products/' . $jamu->gambar); // Jika bukan URL maka diganti Path
+                           @endphp
+
+                           <div class="card" style="background-image: url('{{ $bgUrl }}')">
                                {{-- <div class="price">
                                    <h6>{{ rupiah($jamu->harga) }}</h6>
                                    @if ($jamu->stok < 1)

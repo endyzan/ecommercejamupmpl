@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatbotController;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 
@@ -12,6 +13,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
+// ROUTE UNTUK CHATBOT
+Route::get('/chatbot', [ChatbotController::class, 'index']);
+Route::post('/chatbot/message', [ChatbotController::class, 'chat']);
 
 
 // ROUTE FOR ADMIN & MANAGER
