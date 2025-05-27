@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logos/leaves.jpg') }}">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
         rel="stylesheet">
@@ -26,9 +28,9 @@
 
     <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
 
-    <script src="{{ asset('assets/js/angular.min.js') }}"></script>
-    <script src="{{ asset('assets/js/bKash-checkout.js') }}"></script>
-    <script src="{{ asset('assets/js/bKash-checkout-sandbox.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/angular.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/bKash-checkout.js') }}"></script> --}}
+    {{-- <script src="{{ asset('assets/js/bKash-checkout-sandbox.js') }}"></script> --}}
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -93,7 +95,7 @@
 
 
                     <?php
-                    
+
                     if (Auth::user()) {
                         $cart_amount = DB::table('carts')
                             ->where('user_id', Auth::user()->id)
@@ -102,7 +104,7 @@
                     } else {
                         $cart_amount = 0;
                     }
-                    
+
                     ?>
 
 
@@ -184,7 +186,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="logo">
-                        <a href="{{ url('home') }}"><img src="{{ asset('assets/images/logo.png') }}"
+                        <a href="{{ url('home') }}"><img src="{{ asset('assets/images/logos/logo.png') }}"
                                 alt=""></a>
                     </div>
                 </div>
@@ -207,6 +209,9 @@
 
     <!-- jQuery -->
     <script src="{{ asset('assets/js/jquery-2.1.0.min.js') }}"></script>
+    <!-- jQuery 3.6.4 from CDN -->
+    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
+
 
     <!-- Bootstrap -->
     <script src="{{ asset('assets/js/popper.js') }}"></script>

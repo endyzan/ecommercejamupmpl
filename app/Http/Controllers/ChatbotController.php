@@ -24,6 +24,7 @@ class ChatbotController extends Controller
             ]);
         }
 
+        // return response()->json(['response' => $result]);
         return response()->json(['response' => 'Maaf, tidak ada jamu yang cocok dengan kebutuhan Anda.']);
     }
 }

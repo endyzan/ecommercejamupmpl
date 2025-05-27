@@ -23,7 +23,8 @@
                                    : asset('assets/images/products/' . $jamu->gambar); // Jika bukan URL maka diganti Path
                            @endphp
 
-                           <div class="card" style="background-image: url('{{ $bgUrl }}')">
+                           <div class="card bg-center bg-no-repeat bg-cover"
+                               style="background-image: url('{{ $bgUrl }}')">
                                {{-- <div class="price">
                                    <h6>{{ rupiah($jamu->harga) }}</h6>
                                    @if ($jamu->stok < 1)

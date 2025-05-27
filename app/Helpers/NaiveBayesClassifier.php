@@ -43,7 +43,6 @@ class NaiveBayesClassifier
                 $bestMatch = $jamu;
             }
         }
-
         return $bestMatch;
     }
 
