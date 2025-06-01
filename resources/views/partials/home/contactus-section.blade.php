@@ -2,37 +2,43 @@
 <section class="section" id="reservation">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6 align-self-center">
+            {{-- <div class="col-lg-6 align-self-center"> --}}
+            <div class="align-self-center">
                 <div class="left-text-content">
                     <div class="section-heading">
-                        <h6>Contact Us</h6>
-                        <h2>Here You Can Make A Reservation Or Just walkin to our cafe</h2>
+                        <h6>Hubungi Kami</h6>
+                        <h2>Konsultasi, Pemesanan, atau Informasi Produk Jamu Madura</h2>
                     </div>
-                    <p>Members of Midway Dine are always active to response your call.</p>
+                    <p>Tim kami siap membantu Anda dalam pemesanan, konsultasi herbal, atau informasi seputar jamu
+                        tradisional khas Madura.</p>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="phone">
                                 <i class="fa fa-phone"></i>
-                                <h4>Phone Numbers</h4>
-                                <span><a href="#">01824072334</a>
-                                    <br><a href="#">01554649446</a>
+                                <h4>Nomor Telepon</h4>
+                                <span>
+                                    <a href="tel:081234567890">0812-3456-7890</a><br>
+                                    <a href="tel:082298765432">0822-9876-5432</a>
                                 </span>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="message">
                                 <i class="fa fa-envelope"></i>
-                                <h4>Emails</h4>
-                                <span><a
-                                        href="mailto:sajeebchakraborty.cse2000@gmail.com">sajeebchakraborty.cse2000@gmail.com</a><br>
-                                    <a href="mailto:sajeebcb.cseru@gmail.com">sajeebcb.cseru@gmail.com</a><br>
+                                <h4>Email</h4>
+                                <span>
+                                    <a href="mailto:info@jamumadura.id">info@jamumadura.id</a><br>
+                                    <a href="mailto:cs@jamumadura.id">cs@jamumadura.id</a>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {{-- ADD HERE IF WANTO 2 SEC CONTACT --}}
+
             </div>
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="contact-form">
                     <form id="contact" action="/reserve/confirm" method="post">
                         @csrf
@@ -112,7 +118,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
 </section>

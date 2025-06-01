@@ -1,7 +1,4 @@
 @extends('layout', ['title' => 'Home'])
-<?php
-$banners = ['slide-01.jpg', 'slide-02.jpg', 'slide-03.jpg'];
-?>
 
 @section('page-content')
     @include('partials.home.main-banners-section')

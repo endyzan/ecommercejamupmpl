@@ -19,15 +19,20 @@
                     <div class="main-banner header-text">
                         <div class="Modern-Slider">
 
-                            @foreach ($banners as $banner)
+                            @for ($i = 1; $i <= 4; $i++)
+                                @php
+                                    $banner = 'slide-' . str_pad($i, 2, '0', STR_PAD_LEFT) . '.jpg';
+                                @endphp
                                 <!-- Item -->
                                 <div class="item">
                                     <div class="img-fill">
-                                        <img src="{{ asset('assets/images/banners/' . $banner) }}" alt="">
+                                        <img class="w-full h-full object-cover object-center block"
+                                            src="{{ asset('assets/images/banners/' . $banner) }}" alt="">
                                     </div>
                                 </div>
-                            @endforeach
+                            @endfor
                             <!-- // Item -->
+
 
                         </div>
                     </div>

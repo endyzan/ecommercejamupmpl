@@ -7,53 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/logos/leaves.jpg') }}">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
     <title>Taneyan Jamu</title>
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/bootstrap.min.css') }}">
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/font-awesome.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/css/css-library.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/css/owl-carousel.css') }}">
-
-    <link rel="stylesheet" href="{{ asset('assets/css/lightbox.css') }}">
-
-    {{-- <script src="{{ asset('assets/js/angular.min.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/bKash-checkout.js') }}"></script> --}}
-    {{-- <script src="{{ asset('assets/js/bKash-checkout-sandbox.js') }}"></script> --}}
-
-
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <style>
-        .fixed-logo {
-            bottom: 0 !important;
-            left: 0 !important;
-            /* z-index: 1000; */
-            /* padding-left: 10%; */
-        }
-
-        .animation-easeinout {
-            transition: all 0.8s ease-in-out !important;
-        }
-
-        @media (min-width: 1024px) {
-            .centered_navigation_bar {
-                padding-right: 10% !important;
-            }
-        }
-    </style>
-
+    @include('partials.head-link')
 </head>
 
 <body ng-app="">
@@ -68,100 +24,9 @@
     </div>
     <!-- ***** Preloader End ***** -->
 
+    <!-- ***** Navigation Bar ***** -->
+    @include('partials.layouts-partials.navbar-beranda')
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area" style="z-index:1000">
-        <div class="container">
-            <nav class="main-nav">
-                <!-- ***** Logo Start ***** -->
-                <a href="/" class="logo fixed-logo h-[80px]">
-                    <img src="{{ asset('assets/images/logos/leaves.jpg') }} " class="max-w-[100px] max-h-full">
-                </a>
-                <!-- ***** Logo End ***** -->
-                <!-- ***** Menu Start ***** -->
-                <ul class="nav">
-                    <li class="scroll-to-section"><a href="/">Home</a></li>
-                    <li class="scroll-to-section"><a href="/#about">About</a></li>
-
-                    <li class="scroll-to-section"><a href="/#menu">Menu</a></li>
-
-                    <li class="scroll-to-section"><a href="/trace-my-order">Trace Order</a></li>
-
-                    <li class="scroll-to-section"><a href="/my-order">My Order</a></li>
-
-                    {{-- <li class="scroll-to-section"><a href="/#chefs">Chefs</a></li> --}}
-                    <li class="scroll-to-section"><a href="/#reservation">Contact Us</a></li>
-                    <li><a href="/cart"><i class="fa fa-shopping-cart"></i></a></li>
-
-
-                    <?php
-
-                    if (Auth::user()) {
-                        $cart_amount = DB::table('carts')
-                            ->where('user_id', Auth::user()->id)
-                            ->where('product_order', 'no')
-                            ->count();
-                    } else {
-                        $cart_amount = 0;
-                    }
-
-                    ?>
-
-
-                    <span class='badge badge-warning' id='lblCartCount'> {{ $cart_amount }} </span>
-
-                    <style>
-                        .badge {
-                            padding-left: 9px;
-                            padding-right: 9px;
-                            padding-top: 10px;
-                            -webkit-border-radius: 9px;
-                            -moz-border-radius: 9px;
-                            border-radius: 9px;
-                            height: 16px;
-                            text-align: center;
-                        }
-
-                        .label-warning[href],
-                        .badge-warning[href] {
-                            background-color: #c67605;
-                        }
-
-                        #lblCartCount {
-                            font-size: 12px;
-                            background: #ff0000;
-                            color: #fff;
-                            padding: 0 5px;
-                            vertical-align: top;
-                            margin-left: -10px;
-                        }
-                    </style>
-                    <li>
-                        @if (Route::has('login'))
-                            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                                @auth
-                        <li style="margin-top:-13px;">
-                            <x-app-layout> </x-app-layout>
-                        </li>
-                    @else
-                        <li>
-                            <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li><a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 underline">Register</a>
-                            </li>
-                        @endif
-                    @endauth
-        </div>
-        @endif
-        </li>
-        </ul>
-
-        <!-- ***** Menu End ***** -->
-        </nav>
-        </div>
-    </header>
-    <!-- ***** Header Area End ***** -->
 
     <div style="min-height:750px">
         @yield('page-content')
@@ -185,10 +50,10 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="logo">
-                        <a href="{{ url('home') }}"><img src="{{ asset('assets/images/logos/logo.png') }}"
+                    {{-- <div class="logo">
+                        <a href="{{ url('home') }}"><img class="max-w-[170px] max-h-[50px]" src="{{ asset('assets/images/logos/leaves.jpg') }}"
                                 alt=""></a>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-4 col-xs-12">
                     <div class="left-text-content">
@@ -206,46 +71,7 @@
             </div>
         </div>
     </footer>
-
-    <!-- jQuery -->
-    <script src="{{ asset('assets/js/jquery-2.1.0.min.js') }}"></script>
-    <!-- jQuery 3.6.4 from CDN -->
-    {{-- <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script> --}}
-
-
-    <!-- Bootstrap -->
-    <script src="{{ asset('assets/js/popper.js') }}"></script>
-    <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-
-    <!-- Plugins -->
-    <script src="{{ asset('assets/js/owl-carousel.js') }}"></script>
-    <script src="{{ asset('assets/js/accordions.js') }}"></script>
-    <script src="{{ asset('assets/js/datepicker.js') }}"></script>
-    <script src="{{ asset('assets/js/scrollreveal.min.js') }}"></script>
-    <script src="{{ asset('assets/js/waypoints.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.counterup.min.js') }}"></script>
-    <script src="{{ asset('assets/js/imgfix.min.js') }}"></script>
-    <script src="{{ asset('assets/js/slick.js') }}"></script>
-    <script src="{{ asset('assets/js/lightbox.js') }}"></script>
-    <script src="{{ asset('assets/js/isotope.js') }}"></script>
-
-    <!-- Global Init -->
-    <script src="{{ asset('assets/js/custom.js') }}"></script>
-    <script>
-        $(function() {
-            var selectedClass = "";
-            $("p").click(function() {
-                selectedClass = $(this).attr("data-rel");
-                $("#portfolio").fadeTo(50, 0.1);
-                $("#portfolio div").not("." + selectedClass).fadeOut();
-                setTimeout(function() {
-                    $("." + selectedClass).fadeIn();
-                    $("#portfolio").fadeTo(50, 1);
-                }, 500);
-
-            });
-        });
-    </script>
+    @include('partials.script-bottom')
 </body>
 
 </html>
