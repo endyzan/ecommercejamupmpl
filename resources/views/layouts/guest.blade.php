@@ -36,6 +36,8 @@
             {{ $slot }}
         </div>
     </div>
+
+    @include('partials.layouts-partials.footer-beranda')
     <!-- ALL SCRIPT -->
     @include('partials.script-bottom')
 </body>
