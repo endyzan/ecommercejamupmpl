@@ -8,7 +8,7 @@ use App\Http\Controllers\ChatbotController;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 
-Route::get('/produk', [PublicController::class, 'showProduct'])->name('product');
+Route::get('/produk', [PublicController::class, 'showProduct'])->name('product.index');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -37,4 +37,12 @@ class Jamu extends Model
     {
         return $this->hasMany(Komentar::class, 'id_jamu', 'id_jamu');
     }
+    /**
+     * Ambil data kategori berdasarkan isi dari id_kategori (array)
+     * Ini bukan relasi Eloquent, tapi helper function
+     */
+    public function kategoris()
+    {
+        return KategoriJamu::whereIn('id', $this->id_kategori ?? [])->get();
+    }
 }
