@@ -9,19 +9,18 @@
                 <!-- ***** Logo End ***** -->
                 <!-- ***** Menu Start ***** -->
                 <ul class="nav">
-                    <li class="scroll-to-section"><a href="/">Home</a></li>
-                    <li class="scroll-to-section"><a href="/#about">About</a></li>
-
-                    <li class="scroll-to-section"><a href="/#menu">Menu</a></li>
+                    <li class="scroll-to-section"><a href="/">Beranda</a></li>
+                    <li class="scroll-to-section"><a href="/produk">Produk</a></li>
+                    <li class="scroll-to-section"><a href="/#about">Tentang</a></li>
 
                     @if (Auth::user())
-                        <li class="scroll-to-section"><a href="/trace-my-order">Trace Order</a></li>
+                        <li class="scroll-to-section"><a href="/trace-my-order">Lacak Pesanan</a></li>
 
-                        <li class="scroll-to-section"><a href="/my-order">My Order</a></li>
+                        <li class="scroll-to-section"><a href="/my-order">Pesananku</a></li>
                     @endif
 
                     {{-- <li class="scroll-to-section"><a href="/#chefs">Chefs</a></li> --}}
-                    <li class="scroll-to-section"><a href="/#reservation">Contact Us</a></li>
+                    <li class="scroll-to-section"><a href="/#reservation">Kontak</a></li>
 
                     <?php
                     
@@ -101,18 +100,18 @@
                                     @csrf
                                     <button type="submit"
                                         class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0">
-                                        Logout
+                                        Keluar
                                     </button>
                                 </form>
                             </li>
                         @else
                             <li>
-                                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Log in</a>
+                                <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">Masuk</a>
                             </li>
                             <li>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                        class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5  sm:mr-2 lg:mr-0">Register</a>
+                                        class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5  sm:mr-2 lg:mr-0">Daftar</a>
                                 @endif
                             </li>
                         @endauth

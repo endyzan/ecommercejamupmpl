@@ -31,4 +31,27 @@ class PublicController extends Controller
 
         return view('home', compact('jamus'));
     }
+
+
+    // Produk
+    public function showProduct()
+    {
+        $jamus = Jamu::withCount('komentar') // Hitung jumlah komentar
+            ->withAvg('komentar', 'rating') // Hitung rata-rata rating di DB
+            ->paginate(20); // Batasi hasil per halaman
+
+        // Format rata-rata rating dan tambahkan properti bantu
+        $jamus->getCollection()->transform(function ($jamu) {
+            $per_rate = $jamu->komentar_avg_rating ?? 0;
+            $per_rate = number_format($per_rate, 1);
+
+            $jamu->rating = $per_rate;
+            $jamu->whole = floor($per_rate);
+            $jamu->fraction = $per_rate - floor($per_rate);
+
+            return $jamu;
+        });
+
+        return view('product.index', compact('jamus'));
+    }
 }

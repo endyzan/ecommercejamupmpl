@@ -5,7 +5,7 @@
                <div class="col-lg-6 col-md-6 col-xs-12">
                    <div class="left-text-content h-full">
                        <div class="section-heading">
-                           <h6>About Us</h6>
+                           <h6>Tentang Kami</h6>
                            <h2>Toko Jamu Madura Terpercaya</h2>
                        </div>
                        <p>Kami adalah e-commerce yang menyediakan berbagai jenis jamu tradisional Madura berkualitas
