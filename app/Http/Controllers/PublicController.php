@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Jamu;
 use App\Models\KategoriJamu;
+use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,12 +38,6 @@ class PublicController extends Controller
     // Produk
     public function showProduct(Request $request)
     {
-
-        DB::listen(function ($query) {
-            logger($query->sql);
-            logger($query->bindings);
-        });
-
         // Inisialisasi query dengan relasi komentar
         $query = Jamu::query()
             ->withCount('komentar')
@@ -102,5 +97,46 @@ class PublicController extends Controller
             'jamus' => $jamusPaginated,
             'kategoris' => $kategoris,
         ]);
+    }
+
+    // Detail Produk
+    public function showProductDetail($id)
+    {
+        $jamu = Jamu::select('*')->with(['komentar' => function ($query) {
+            $query->orderBy('created_at', 'desc');
+        }])->findOrFail($id);
+
+        // Hitung rating
+        $total_rate = $jamu->komentar->sum('rating');
+        $total_voter = $jamu->komentar->count();
+
+        $per_rate = $total_voter > 0 ? $total_rate / $total_voter : 0;
+        $per_rate = number_format($per_rate, 1);
+
+        $jamu->rating = $per_rate; // Rata-rata rating
+        $jamu->whole = floor($per_rate); // Bulatkan rating
+        $jamu->fraction = $per_rate - floor($per_rate); // Pecahan rating
+        $jamu->reviewers = $total_voter; // Total Voters
+
+        // Hitung jumlah rating per bintang
+        $fivestar = $jamu->komentar->where('rating', 5)->count();
+        $fourstar = $jamu->komentar->where('rating', 4)->count();
+        $threestar = $jamu->komentar->where('rating', 3)->count();
+        $twostar = $jamu->komentar->where('rating', 2)->count();
+        $onestar = $jamu->komentar->where('rating', 1)->count();
+        $jamu->rating_count = [
+            '5' => $fivestar,
+            '4' => $fourstar,
+            '3' => $threestar,
+            '2' => $twostar,
+            '1' => $onestar,
+        ];
+        foreach ($jamu->komentar as $komentar) {
+            $komentar->nama_user = DB::table('users')
+                ->where('id', $komentar->id_user)
+                ->value('name') ?? 'pengguna' . random_int(111111, 999999);
+        }
+
+        return view('product.product', compact('jamu'));
     }
 }

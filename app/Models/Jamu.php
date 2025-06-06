@@ -11,6 +11,7 @@ class Jamu extends Model
     use HasFactory;
 
     protected $table = 'jamu';
+    protected $primaryKey = 'id_jamu';
     protected $fillable = [
         'nama_jamu',
         'harga',

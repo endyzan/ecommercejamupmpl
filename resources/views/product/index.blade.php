@@ -1,4 +1,4 @@
-@extends('layout', ['title' => 'Home'])
+@extends('layout', ['title' => 'Halaman Produk'])
 
 @section('page-content')
     {{-- start-content --}}
@@ -73,11 +73,11 @@
     <table class="table table-striped table-bordered m-[10%] mx-auto mt-10" style="max-width:70%;">
         @foreach ($jamus as $jamu)
             <tr>
-                <td>
+                <td width=230px>
                     <img src="{{ asset('assets/images/products/' . $jamu->gambar) }}" loading="lazy" height=150px
                         width=180px>
                 </td>
-                <td>
+                <td class="relative">
                     <h2>{{ $jamu->nama_jamu }}</h2>
                     <h4>{{ rupiah($jamu->harga) }}</h4>
                     <p>{{ $jamu->deskripsi }}</p>
@@ -108,6 +108,7 @@
                             <p class="btn btn-danger">Out of Stock</p>
                         @endif
                     </form>
+                    <a class="absolute right-4 bottom-2 hover:text-red-700" href="{{ route('product.productDetail', $jamu->id_jamu) }}">Selengkapnya ...</a>
                 </td>
             </tr>
         @endforeach
