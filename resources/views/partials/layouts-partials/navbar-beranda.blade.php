@@ -14,9 +14,9 @@
                     <li class="scroll-to-section"><a href="/#about">Tentang</a></li>
 
                     @if (Auth::user())
-                        <li class="scroll-to-section"><a href="/trace-my-order">Lacak Pesanan</a></li>
+                        {{-- <li class="scroll-to-section"><a href="/trace-my-order">Lacak Pesanan</a></li> --}}
 
-                        <li class="scroll-to-section"><a href="/my-order">Pesananku</a></li>
+                        <li class="scroll-to-section"><a href="{{ route('pesanan.index') }}">Pesananku</a></li>
                     @endif
 
                     {{-- <li class="scroll-to-section"><a href="/#chefs">Chefs</a></li> --}}
@@ -37,7 +37,7 @@
                     ?>
 
                     @if (Auth::user())
-                        <li><a href="/cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart"></i></a></li>
                         <span class='badge badge-warning' id='lblCartCount'> {{ $cart_amount }} </span>
                     @endif
 

@@ -30,6 +30,7 @@
 
 
     <div style="min-height:750px">
+        {{-- @include('components.flowbite-alert') --}}
         @yield('page-content')
     </div>
 

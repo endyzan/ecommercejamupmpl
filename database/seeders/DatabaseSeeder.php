@@ -34,11 +34,20 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('manager123'),
             'role' => 2,
         ]);
+        // Manager
+        User::factory()->create([
+            'name' => 'Ahmad Ar-rosyid H',
+            'username' => 'rosyid_gg',
+            'email' => 'hexagonalmateur@gmail.com',
+            'password' => bcrypt('hexa1234'),
+            'role' => 0,
+        ]);
 
         $this->call([
             KategoriJamuSeeder::class,
             JamuSeeder::class,
             KomentarSeeder::class,
+            AlamatSeeder::class,
         ]);
     }
 }

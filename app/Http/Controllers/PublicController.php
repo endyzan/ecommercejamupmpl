@@ -7,6 +7,8 @@ use App\Models\KategoriJamu;
 use App\Models\Komentar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 
 class PublicController extends Controller
@@ -78,7 +80,7 @@ class PublicController extends Controller
         }
 
         // ✅ Paginasi manual setelah filter
-        $perPage = 20;
+        $perPage = 10;
         $currentPage = $request->input('page', 1);
         $pagedJamus = $jamus->forPage($currentPage, $perPage);
         $jamusPaginated = new \Illuminate\Pagination\LengthAwarePaginator(

@@ -34,7 +34,29 @@ class RegisteredUserController extends Controller
             'username' => ['required', 'string', 'lowercase', 'max:12', 'unique:' . User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'min:8', 'confirmed', Rules\Password::defaults()],
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama tidak boleh lebih dari 64 karakter.',
+
+            'username.required' => 'Username wajib diisi.',
+            'username.string' => 'Username harus berupa teks.',
+            'username.lowercase' => 'Username harus menggunakan huruf kecil semua.',
+            'username.max' => 'Username tidak boleh lebih dari 12 karakter.',
+            'username.unique' => 'Username sudah digunakan.',
+
+            'email.required' => 'Email wajib diisi.',
+            'email.string' => 'Email harus berupa teks.',
+            'email.lowercase' => 'Email harus menggunakan huruf kecil semua.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
+            'email.unique' => 'Email sudah digunakan.',
+
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal terdiri dari 8 karakter.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
+
 
         $user = User::create([
             'name' => $request->name,

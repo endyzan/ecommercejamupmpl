@@ -4,7 +4,8 @@
     {{-- start-content --}}
 
     {{-- SEARCH --}}
-    <form class="flex items-center max-w-[70%] mx-auto mt-[15vh]" method="GET" action="{{ route('product.index') }}">
+    <form id="top" class="flex items-center max-w-[70%] mx-auto mt-[1vh]" method="GET"
+        action="{{ route('product.index') }}">
         <label for="simple-search" class="sr-only">Search</label>
         <div class="relative w-full">
             <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -64,9 +65,9 @@
     </form>
 
 
-    <p class="text-center mt-4 text-gray-600">
+    {{-- <p class="text-center mt-4 text-gray-600">
         Menampilkan {{ count($jamus) }} produk.
-    </p>
+    </p> --}}
 
 
     {{-- PRODUCT LIST --}}
@@ -81,7 +82,7 @@
                     <h2>{{ $jamu->nama_jamu }}</h2>
                     <h4>{{ rupiah($jamu->harga) }}</h4>
                     <p>{{ $jamu->deskripsi }}</p>
-                    <form method="post" action="">
+                    <form method="POST" action="{{ route('cart.add') }}">
                         @csrf
 
                         <span class="product_rating">
@@ -101,19 +102,23 @@
                         <br>
 
                         @if ($jamu->stok > 0)
-                            <input type="number" name="number" style="width:50px;" id="myNumber" value="1">
+                            <input type="number" name="qty" style="width:50px;" id="myNumber" value="1">
+                            <input type="hidden" name="id" value="{{ $jamu->id_jamu }}">
                             <button class="btn btn-success">Add to Cart</button>
                         @endif
                         @if ($jamu->stok < 1)
                             <p class="btn btn-danger">Out of Stock</p>
                         @endif
                     </form>
-                    <a class="absolute right-4 bottom-2 hover:text-red-700" href="{{ route('product.productDetail', $jamu->id_jamu) }}">Selengkapnya ...</a>
+                    <a class="absolute right-4 bottom-2 hover:text-red-700"
+                        href="{{ route('product.productDetail', $jamu->id_jamu) }}">></a>
                 </td>
             </tr>
         @endforeach
     </table>
-    {{ $jamus->links() }}
+    <div class="mt-4">
+        {{ $jamus->links('pagination::custom-paginate', ['pagination' => $jamus]) }}
+    </div>
 
 
     {{-- end-content --}}

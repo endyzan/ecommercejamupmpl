@@ -64,10 +64,11 @@
                                            <a href="/rate/{{ $jamu->id }}" style="color:blue;">Rate this</a>
                                            <p>Quantity: </p>
 
-                                           <form method="post" action="">
+                                           <form method="post" action="{{ route('cart.add') }}">
                                                @csrf
-                                               <input type="number" name="number" style="width:50px;" id="myNumber"
+                                               <input type="number" name="qty" style="width:50px;" id="myNumber"
                                                    value="1">
+                                               <input type="hidden" name="id" value={{ $jamu->id_jamu }}>
                                                <input type="submit" class="btn btn-success" value="Add Chart"
                                                    {{ $jamu->stok < 1 ? 'disabled' : '' }}>
                                            </form>
