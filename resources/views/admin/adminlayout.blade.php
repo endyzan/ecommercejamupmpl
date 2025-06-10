@@ -26,7 +26,7 @@
 
                 <!-- content-wrapper ends -->
                 <!-- partial:partials/_footer.html -->
-                @include('admin.partials_layout.footer')
+                {{-- @include('admin.partials_layout.footer') --}}
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->

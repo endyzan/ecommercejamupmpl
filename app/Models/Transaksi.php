@@ -23,7 +23,7 @@ class Transaksi extends Model
     protected $fillable = [
         'tanggal_transaksi',
         'total_transaksi',
-        'status_pembayaran',
+        'status_pembayaran', // 0 = Belum Bayar, 1 = Dikemas. // 2 = Dikirim, 3 = Diterima, 4 = Dibatalkan
         'id_user',
     ];
 

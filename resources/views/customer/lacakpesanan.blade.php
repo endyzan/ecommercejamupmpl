@@ -1,12 +1,13 @@
 @extends('layout', ['title' => 'Keranjang'])
 
 @section('page-content')
-    <section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+    <section id="top" class="bg-white py-8 antialiased md:py-16">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
-            <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Track the delivery of order
-                #957684673</h2>
+            <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Pelacakan Pesanan
+                #TRX{{ str_pad($transaksi->id_transaksi, 8, '0', STR_PAD_LEFT) }}</h2>
 
             <div class="mt-6 sm:mt-8 lg:flex lg:gap-8">
+                <!-- KIRI: Daftar produk -->
                 <div
                     class="w-full divide-y divide-gray-200 overflow-hidden rounded-lg border border-gray-200 lg:max-w-xl xl:max-w-2xl">
                     @foreach ($transaksi->detilTransaksi as $detail)
@@ -39,6 +40,10 @@
                         </div>
                     @endforeach
 
+                </div>
+
+                <!-- KANAN: Riwayat pengiriman -->
+                <div class="mt-6 grow sm:mt-8 lg:mt-0">
 
                     <div class="space-y-4 bg-gray-50 p-6">
                         <div class="space-y-2">

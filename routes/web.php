@@ -40,6 +40,18 @@ Route::get('/pesanan/detail/{id}', [ManajemenPesanan::class, 'showOrderDetail'])
 Route::post('/pesanan/kirim/{id}', [ManajemenPesanan::class, 'submitOrder'])->name('pesanan.submit');
 Route::get('/pesanan/lacak_pesanan/{id}', [ManajemenPesanan::class, 'trackOrder'])->name('pesanan.track');
 
+// CRUD PANEL
+Route::get('/panel/produk', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'index'])->name('panel.produk');
+Route::get('/panel/produk/tambah', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'create'])->name('panel.produk.create');
+Route::post('/panel/produk/store', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'store'])->name('panel.produk.store');
+Route::get('/panel/produk/edit/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'edit'])->name('panel.produk.edit');
+Route::post('/panel/produk/update/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'update'])->name('panel.produk.update');
+
+Route::get('/panel/kategori', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'index'])->name('panel.kategori');
+Route::get('/panel/kategori/tambah', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'create'])->name('panel.kategori.create');
+Route::post('/panel/kategori/store', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'store'])->name('panel.kategori.store');
+Route::get('/panel/kategori/edit/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'edit'])->name('panel.kategori.edit');
+Route::post('/panel/kategori/update/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'update'])->name('panel.kategori.update');
 // RUTE BAWAAN LARAVEL ( HAPUS SAJA KALAU TIDAK DIPERLUKAN )
 Route::get('/dashboard', function () {
     return view('dashboard');
