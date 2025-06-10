@@ -17,11 +17,13 @@ class ManajemenPesanan extends Controller
     function index()
     {
         $orders = Transaksi::where('id_user', Auth::id())
+            ->where('status_pembayaran', '!=', 4)
             ->orderBy('tanggal_transaksi', 'desc')
             ->paginate(10);
 
         return view('customer.pesanan', compact('orders'));
     }
+
 
     function showOrderDetail($id)
     {
@@ -54,7 +56,25 @@ class ManajemenPesanan extends Controller
         $transaksi->status_pembayaran = 1;
         $transaksi->save();
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dikirim!');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
+    }
+    public function completeOrder(Request $request, $id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        $transaksi->status_pembayaran = 3; // Selesai
+        $transaksi->save();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
+    }
+    public function cancelOrder(Request $request, $id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        $transaksi->status_pembayaran = 4; // Dibatalkan
+        $transaksi->save();
+
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
     }
 
     public function trackOrder($id)

@@ -93,25 +93,32 @@
                                 <div
                                     class="w-full grid sm:grid-cols-2 lg:flex lg:w-64 lg:items-center lg:justify-end gap-3 pt-4">
                                     @if ($order->status_pembayaran == 0)
-                                        <form method="POST" action="">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="w-full rounded-lg border border-red-700 px-3 py-2 text-sm font-medium text-red-700 hover:bg-red-700 hover:text-white transition">
-                                                Batalkan
-                                            </button>
-                                        </form>
+                                        <a href="{{ route('pesanan.cancel', $order->id_transaksi) }}"
+                                            class="w-full lg:text-[11.5px] text-sm inline-flex justify-center rounded-lg border border-gray-300 bg-red-500 px-3 py-2 font-medium text-gray-100 hover:bg-red-700 hover:text-white transition">
+                                            Batalkan Pesanan
+                                        </a>
                                     @else
                                         <a href="{{ route('pesanan.track', $order->id_transaksi) }}"
-                                            class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-blue-900 hover:bg-blue-500 transition">
+                                            class="w-full lg:text-[11.5px] text-sm inline-flex justify-center rounded-lg border border-gray-300 bg-blue-500 px-3 py-2 font-medium text-gray-100 hover:bg-blue-700 hover:text-white transition">
                                             Lacak Pesanan
                                         </a>
                                     @endif
-
-                                    <a href="{{ route('pesanan.detail', $order->id_transaksi) }}"
-                                        class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition">
-                                        Lihat Detil
-                                    </a>
+                                    @if ($order->status_pembayaran == 0)
+                                        <a href="{{ route('pesanan.detail', $order->id_transaksi) }}"
+                                            class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-green-500 px-3 py-2 text-sm font-medium text-gray-100 hover:bg-green-700 hover:text-white transition">
+                                            Bayar
+                                        </a>
+                                    @elseif ($order->status_pembayaran == 1)
+                                        <a href="{{ route('pesanan.detail', $order->id_transaksi) }}"
+                                            class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition">
+                                            Lihat Detil
+                                        </a>
+                                    @elseif ($order->status_pembayaran == 2)
+                                        <a href="{{ route('pesanan.complete', $order->id_transaksi) }}"
+                                            class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-green-500 transition">
+                                            Pesanan Selesai
+                                        </a>
+                                    @endif
                                 </div>
                             </div>
                         @empty
