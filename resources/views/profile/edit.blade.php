@@ -1,27 +1,44 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-2xl text-green-800 leading-tight">
+                {{ __('Profile Settings') }}
+            </h2>
+            <div class="text-sm text-green-600">
+                {{ __('Last updated: ') }} {{ now()->format('M d, Y') }}
+            </div>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
+    <div class="py-8 bg-green-50">
+        <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 space-y-8">
+            <!-- Profile Information Section -->
+            <div class="p-6 sm:p-8 bg-white shadow-md rounded-lg border border-green-200">
+                <div class="flex items-center mb-6">
+                    <div class="p-3 rounded-full bg-green-100 text-green-700 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-green-800">{{ __('Personal Information') }}</h3>
+                </div>
+                <div class="max-w-2xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
+            <!-- Password Section -->
+            <div class="p-6 sm:p-8 bg-white shadow-md rounded-lg border border-green-200">
+                <div class="flex items-center mb-6">
+                    <div class="p-3 rounded-full bg-green-100 text-green-700 mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-green-800">{{ __('Password & Security') }}</h3>
                 </div>
-            </div>
-
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
+                <div class="max-w-2xl">
+                    @include('profile.partials.update-password-form')
                 </div>
             </div>
         </div>

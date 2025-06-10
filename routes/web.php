@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublicController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatbotController;
+use App\Http\Controllers\CRUD\AkunAdminCRUD;
+use App\Http\Controllers\CRUD\AkunUserCRUD;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 
@@ -52,6 +54,17 @@ Route::get('/panel/kategori/tambah', [\App\Http\Controllers\CRUD\KategoriCRUD::c
 Route::post('/panel/kategori/store', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'store'])->name('panel.kategori.store');
 Route::get('/panel/kategori/edit/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'edit'])->name('panel.kategori.edit');
 Route::post('/panel/kategori/update/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'update'])->name('panel.kategori.update');
+
+Route::get('/panel/akun-admin', [AkunAdminCRUD::class, 'index'])->name('panel.akunadmin');
+Route::get('/panel/akun-admin/tambah', [AkunAdminCRUD::class, 'create'])->name('panel.akunadmin.create');
+Route::post('/panel/akun-admin/store', [AkunAdminCRUD::class, 'store'])->name('panel.akunadmin.store');
+Route::get('/panel/akun-admin/edit/{id}', [AkunAdminCRUD::class, 'edit'])->name('panel.akunadmin.edit');
+Route::post('/panel/akun-admin/update/{id}', [AkunAdminCRUD::class, 'update'])->name('panel.akunadmin.update');
+Route::delete('/panel/akun-admin/{id}', [AkunAdminCRUD::class, 'destroy'])->name('panel.akunadmin.destroy');
+
+Route::get('/panel/pengguna', [AkunUserCRUD::class, 'index'])->name('panel.akunuser');
+Route::delete('/panel/pengguna/{id}', [AkunUserCRUD::class, 'destroy'])->name('panel.akunuser.destroy');
+
 // RUTE BAWAAN LARAVEL ( HAPUS SAJA KALAU TIDAK DIPERLUKAN )
 Route::get('/dashboard', function () {
     return view('dashboard');

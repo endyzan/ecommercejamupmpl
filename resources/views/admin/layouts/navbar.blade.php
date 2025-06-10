@@ -86,9 +86,17 @@
                                     role="menuitem">Earnings</a>
                             </li> --}}
                             <li>
-                                <a href="{{ route('logout') }}"
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+
+                                    <a href="{{ route('logout') }}"
                                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white"
-                                    role="menuitem">Sign out</a>
+                                    role="menuitem"
+                                    onclick="event.preventDefault();
+                                                    this.closest('form').submit();">
+                                        Sign out
+                                    </a>
+                                </form>
                             </li>
                         </ul>
                     </div>

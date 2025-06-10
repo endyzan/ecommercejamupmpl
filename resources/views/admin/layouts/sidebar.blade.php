@@ -91,9 +91,15 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#"
+                                <a href="{{ route('panel.akunadmin') }}#"
                                     class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 @if ($page_slug === 'users') bg-gray-100 dark:bg-gray-700 @endif">
                                     Akun Admin
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('panel.akunuser') }}#"
+                                    class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 @if ($page_slug === 'users') bg-gray-100 dark:bg-gray-700 @endif">
+                                    Akun User
                                 </a>
                             </li>
                         </ul>
