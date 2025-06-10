@@ -28,6 +28,7 @@ Route::post('/chatbot/message', [ChatbotController::class, 'chat']);
 // ROUTE FOR ADMIN & MANAGER
 Route::get('/panel', [AdminController::class, 'index'])->name('panel');
 Route::get('/panel/transaksi', [AdminController::class, 'ManageTransaksi'])->name('panel.transactions');
+Route::get('/panel/report', [AdminController::class, 'showfullreport'])->name('panel.report');
 
 // ROUTE UNTUK MANAGE TRANSAKSI
 Route::get('/panel/transaksi/kirim/{id}', [AdminController::class, 'kirimPesanan'])->name('panel.transaction.send');
