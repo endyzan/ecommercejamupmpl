@@ -95,7 +95,7 @@
                         </a>
                         @if ($transaksi->status_pembayaran == 0)
                             <button type="submit"
-                                class="mt-0 flex w-full items-center justify-center rounded-lg bg-red-500 hover:bg-red-700 hover:text-white px-5 py-2.5 text-sm font-medium text-black hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 sm:mt-0">
+                                class="mt-0 flex w-full items-center justify-center rounded-lg bg-green-500 hover:bg-green-700 hover:text-white px-5 py-2.5 text-sm font-medium text-gray-100 hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 sm:mt-0">
                                 Bayar
                             </button>
                         @endif

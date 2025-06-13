@@ -29,7 +29,13 @@ Route::post('/chatbot/message', [ChatbotController::class, 'chat']);
 
 // ROUTE FOR ADMIN & MANAGER
 Route::get('/panel', [AdminController::class, 'index'])->name('panel');
+Route::get('/panel/transaksi', [AdminController::class, 'ManageTransaksi'])->name('panel.transactions');
+Route::get('/panel/report', [AdminController::class, 'showfullreport'])->name('panel.report');
 
+// ROUTE UNTUK MANAGE TRANSAKSI
+Route::get('/panel/transaksi/kirim/{id}', [AdminController::class, 'kirimPesanan'])->name('panel.transaction.send');
+Route::get('/panel/transaksi/batalkan/{id}', [AdminController::class, 'cancelPesanan'])->name('panel.transaction.batal');
+Route::get('/panel/transaksi/detail/{id}', [AdminController::class, 'showTransactionDetail'])->name('panel.transaction.detail');
 
 // ROUTE FOR CART
 Route::get('/cart', [ManajemenKeranjang::class, 'showCart'])->name('cart.index');
@@ -41,6 +47,8 @@ Route::get('/pesanan', [ManajemenPesanan::class, 'index'])->name('pesanan.index'
 Route::get('/pesanan/detail/{id}', [ManajemenPesanan::class, 'showOrderDetail'])->name('pesanan.detail');
 Route::post('/pesanan/kirim/{id}', [ManajemenPesanan::class, 'submitOrder'])->name('pesanan.submit');
 Route::get('/pesanan/lacak_pesanan/{id}', [ManajemenPesanan::class, 'trackOrder'])->name('pesanan.track');
+Route::get('/pesanan/selesai/{$id}', [ManajemenPesanan::class, 'completeOrder'])->name('pesanan.complete');
+Route::get('/pesanan/batal/{id}', [ManajemenPesanan::class, 'cancelOrder'])->name('pesanan.cancel');
 
 // CRUD PANEL
 Route::get('/panel/produk', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'index'])->name('panel.produk');
