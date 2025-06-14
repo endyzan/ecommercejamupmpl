@@ -3,20 +3,9 @@
 @section('page-content')
     <div>
         <br>
-        @if (Session::has('wrong'))
-            <div class="alert">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>Opps !</strong> {{ Session::get('wrong') }}
-            </div>
-        @endif
-        @if (Session::has('success'))
-            <br>
-            <div class="success">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-                <strong>Berhasil !</strong> {{ Session::get('success') }}
-            </div>
-            <br>
-        @endif
+        {{-- Load Alert --}}
+        @include('components.flowbite-alert')
+
         <br>
 
         <br>
@@ -26,10 +15,10 @@
             <table id="cart" class="table table-hover table-condensed container">
                 <thead>
                     <tr>
-                        <th style="width:50%">Product</th>
-                        <th style="text-align:center;width:10%">Price</th>
-                        <th style="width:8%">Quantity</th>
-                        <th style="width:22%" class="text-center">Subtotal</th>
+                        <th style="width:50%">Nama Produk</th>
+                        <th style="text-align:center;width:10%">Harga</th>
+                        <th style="width:8%">Jumlah</th>
+                        <th style="width:22%" class="text-center">Harga Total</th>
                         <th style="width:10%"></th>
                     </tr>
                 </thead>
@@ -40,17 +29,52 @@
                         <tr>
                             <td>{{ $product->name }}</td>
                             <td style="text-align:center">{{ rupiah($product->price) }}</td>
-                            <td style="text-align:center">{{ $product->quantity }}</td>
-                            <td style="text-align:center">{{ rupiah($product->subtotal) }}</td>
-                            <td style="text-align:center" class="actions" data-th="">
-                                <form method="post" action="" onsubmit="return confirm('Sure?')">
+
+                            <td style="text-align:center">
+                                <form action="{{ route('keranjang.update', ['id_jamu' => $product->id_jamu]) }}"
+                                    method="POST" class="quantity-form">
                                     @csrf
-                                    <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash">
-                                        </i></button>
+                                    @method('PUT')
+                                    <input type="number" name="quantity" value="{{ $product->quantity }}" min="1"
+                                        class="form-control form-control-sm quantity-input bg-transparent h-[26px] pr-0"
+                                        style="width:60px; background-color: #f1f1f1; text-align:center;" readonly />
                                 </form>
                             </td>
+                            <td style="text-align:center">{{ rupiah($product->subtotal) }}</td>
+                            <td style="text-align:center">
+                                <button data-modal-target="c-m{{ $product->id_jamu }}-delete"
+                                    data-modal-toggle="c-m{{ $product->id_jamu }}-delete"
+                                    class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash">
+                                    </i></button>
+                            </td>
                         </tr>
+                        @include('customer.components.deletecart')
                     @endforeach
+
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const inputs = document.querySelectorAll('.quantity-input');
+
+                            inputs.forEach(input => {
+                                // Saat pertama diklik, hilangkan readonly
+                                input.addEventListener('click', function() {
+                                    if (this.hasAttribute('readonly')) {
+                                        this.removeAttribute('readonly');
+                                        this.style.backgroundColor = 'white';
+                                        this.focus();
+                                        this.select();
+                                    }
+                                });
+
+                                // Jika nilai berubah, submit form secara otomatis
+                                input.addEventListener('change', function() {
+                                    const form = this.closest('form');
+                                    if (form) form.submit();
+                                });
+                            });
+                        });
+                    </script>
+
 
 
                     @if ($total_price != 0)

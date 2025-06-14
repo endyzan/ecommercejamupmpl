@@ -44,6 +44,10 @@ class ManajemenPesanan extends Controller
     {
         $transaksi = Transaksi::findOrFail($id);
 
+        if ($request->alamat == 'add-new') {
+            redirect()->route('profile.edit')->with('rutetambahalamat', 'Silakan tambahkan alamat baru anda.');
+        }
+
         // Validasi jika perlu (contoh: checkbox harus dicentang)
         $request->validate([
             'alamat_id' => 'required|exists:alamat,id_alamat',
@@ -74,7 +78,7 @@ class ManajemenPesanan extends Controller
         $transaksi->status_pembayaran = 4; // Dibatalkan
         $transaksi->save();
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sudah Di Batalkan!');
     }
 
     public function trackOrder($id)

@@ -27,11 +27,19 @@ class ManajemenKeranjang extends Controller
 
         foreach ($cartItems as $items) {
             $first = $items->first();
+            // Jika produk tidak ditemukan (relasi jamu null), hapus semua item dari keranjang
+            if (!$first->jamu) {
+                foreach ($items as $item) {
+                    $item->delete(); // Hapus item yang tidak memiliki produk
+                }
+                continue; // Lewati proses selanjutnya
+            }
             $quantity = $items->count();
             $price = $first->jamu->harga ?? 0; // Pastikan harga tersedia
             $subtotal = $price * $quantity;
 
             $carts[] = (object)[
+                'id_jamu' => $first->jamu->id_jamu ?? 0,
                 'name' => $first->jamu->nama_jamu ?? 'Produk tidak ditemukan',
                 'price' => $price,
                 'quantity' => $quantity,
@@ -93,6 +101,49 @@ class ManajemenKeranjang extends Controller
             ->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
 
+    public function update(Request $request, $id_jamu)
+    {
+        $request->validate([
+            'quantity' => 'required|integer|min:1'
+        ]);
+
+        $userId = Auth::id();
+        $quantity = (int) $request->input('quantity');
+
+        // Hapus semua entri produk ini di keranjang user
+        Keranjang::where('id_user', $userId)
+            ->where('id_jamu', $id_jamu)
+            ->delete();
+
+        // Tambahkan ulang sesuai jumlah baru
+        $items = [];
+        for ($i = 0; $i < $quantity; $i++) {
+            $items[] = [
+                'id_user' => $userId,
+                'id_jamu' => $id_jamu,
+                'created_at' => now(),
+                'updated_at' => now()
+            ];
+        }
+
+        Keranjang::insert($items);
+
+        return redirect()->back()->with('success', 'Jumlah produk berhasil diperbarui.');
+    }
+
+    public function delete($id_jamu)
+    {
+        $userId = Auth::id();
+
+        // Hapus semua item dari keranjang user berdasarkan id_jamu
+        Keranjang::where('id_user', $userId)
+            ->where('id_jamu', $id_jamu)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang.');
+    }
+
+
 
     public function processCheckout(Request $request)
     {
@@ -147,7 +198,7 @@ class ManajemenKeranjang extends Controller
             Keranjang::where('id_user', $userId)->delete();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Transaksi berhasil diproses!');
+            return redirect()->route('pesanan.index')->with('success', 'Pesanan Ditambah!');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->with('wrong', 'Terjadi kesalahan saat proses checkout.');

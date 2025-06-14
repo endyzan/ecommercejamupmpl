@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\CRUD\AkunAdminCRUD;
 use App\Http\Controllers\CRUD\AkunUserCRUD;
+use App\Http\Controllers\Customer\ManajemenKomentar;
 
 Route::get('/', [PublicController::class, 'index'])->name('home');
 
@@ -19,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::post('/profile/add-address', [ProfileController::class, 'addAddress'])->name('profile.addAddress');
+    Route::delete('/profile/delete-address/{id}', [ProfileController::class, 'deleteAddress'])->name('profile.deleteAddress');
 });
 
 
@@ -41,27 +44,32 @@ Route::get('/panel/transaksi/detail/{id}', [AdminController::class, 'showTransac
 Route::get('/cart', [ManajemenKeranjang::class, 'showCart'])->name('cart.index');
 Route::post('/cart/add', [ManajemenKeranjang::class, 'addToCart'])->name('cart.add');
 Route::post('/checkout', [ManajemenKeranjang::class, 'processCheckout'])->name('checkout.process');
+Route::put('/keranjang/update/{id_jamu}', [ManajemenKeranjang::class, 'update'])->name('keranjang.update');
+Route::delete('/keranjang/delete/{id_jamu}', [ManajemenKeranjang::class, 'delete'])->name('keranjang.delete');
+
 
 // ROUTE UNTUK MANAGE PESANAN
 Route::get('/pesanan', [ManajemenPesanan::class, 'index'])->name('pesanan.index');
 Route::get('/pesanan/detail/{id}', [ManajemenPesanan::class, 'showOrderDetail'])->name('pesanan.detail');
 Route::post('/pesanan/kirim/{id}', [ManajemenPesanan::class, 'submitOrder'])->name('pesanan.submit');
 Route::get('/pesanan/lacak_pesanan/{id}', [ManajemenPesanan::class, 'trackOrder'])->name('pesanan.track');
-Route::get('/pesanan/selesai/{$id}', [ManajemenPesanan::class, 'completeOrder'])->name('pesanan.complete');
+Route::get('/pesanan/selesai/{id}', [ManajemenPesanan::class, 'completeOrder'])->name('pesanan.complete');
 Route::get('/pesanan/batal/{id}', [ManajemenPesanan::class, 'cancelOrder'])->name('pesanan.cancel');
+
+// ROUTE UNTUK RATING
+Route::get('/pesanan/rating/{id}', [ManajemenKomentar::class, 'showRatingForm'])->name('pesanan.rating');
+Route::post('/pesanan/rating/store', [ManajemenKomentar::class, 'storeRating'])->name('pesanan.rating.store');
 
 // CRUD PANEL
 Route::get('/panel/produk', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'index'])->name('panel.produk');
-Route::get('/panel/produk/tambah', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'create'])->name('panel.produk.create');
 Route::post('/panel/produk/store', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'store'])->name('panel.produk.store');
-Route::get('/panel/produk/edit/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'edit'])->name('panel.produk.edit');
-Route::post('/panel/produk/update/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'update'])->name('panel.produk.update');
+Route::put('/panel/produk/update/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'update'])->name('panel.produk.update');
+Route::delete('/panel/produk/{id}', [\App\Http\Controllers\CRUD\ProdukCRUD::class, 'destroy'])->name('panel.produk.destroy');
 
 Route::get('/panel/kategori', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'index'])->name('panel.kategori');
-Route::get('/panel/kategori/tambah', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'create'])->name('panel.kategori.create');
 Route::post('/panel/kategori/store', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'store'])->name('panel.kategori.store');
-Route::get('/panel/kategori/edit/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'edit'])->name('panel.kategori.edit');
-Route::post('/panel/kategori/update/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'update'])->name('panel.kategori.update');
+Route::put('/panel/kategori/update/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'update'])->name('panel.kategori.update');
+Route::delete('/panel/kategori/{id}', [\App\Http\Controllers\CRUD\KategoriCRUD::class, 'destroy'])->name('panel.kategori.destroy');
 
 Route::get('/panel/akun-admin', [AkunAdminCRUD::class, 'index'])->name('panel.akunadmin');
 Route::get('/panel/akun-admin/tambah', [AkunAdminCRUD::class, 'create'])->name('panel.akunadmin.create');

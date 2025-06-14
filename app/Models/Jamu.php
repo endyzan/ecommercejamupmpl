@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Jamu extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'jamu';
     protected $primaryKey = 'id_jamu';
@@ -30,6 +31,12 @@ class Jamu extends Model
     protected $casts = [
         'id_kategori' => 'array',
     ];
+
+    /**
+     * Soft delete untuk menghapus data tanpa menghapusnya secara permanen
+     */
+
+    protected $dates = ['deleted_at'];
 
     /**
      * Relasi ke model Komentar

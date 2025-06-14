@@ -24,12 +24,8 @@
 
                     <?php
                     
-                    if (Auth::user()) {
-                        // $cart_amount = DB::table('carts')
-                        //     ->where('user_id', Auth::user()->id)
-                        //     ->where('product_order', 'no')
-                        //     ->count();
-                        $cart_amount = 0;
+                    if (Auth::check()) {
+                        $cart_amount = DB::table('keranjang')->where('id_user', Auth::id())->count();
                     } else {
                         $cart_amount = 0;
                     }
@@ -37,7 +33,15 @@
                     ?>
 
                     @if (Auth::user())
-                        <li><a href="{{ route('cart.index') }}"><i class="fa fa-shopping-cart"></i></a></li>
+                        @if ($title == 'Keranjang')
+                            <li class="pt-[12px]"><a href="{{ route('cart.index') }}"><i
+                                        class="fa fa-shopping-cart"></i></a>
+                            </li>
+                        @else
+                            <li class="scroll-to-section"><a href="{{ route('cart.index') }}"><i
+                                        class="fa fa-shopping-cart"></i></a>
+                            </li>
+                        @endif
                         <span class='badge badge-warning' id='lblCartCount'> {{ $cart_amount }} </span>
                     @endif
 

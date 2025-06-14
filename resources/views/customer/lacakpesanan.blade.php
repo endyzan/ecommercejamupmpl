@@ -3,6 +3,9 @@
 @section('page-content')
     <section id="top" class="bg-white py-8 antialiased md:py-16">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+            {{-- Load Alert --}}
+            @include('components.flowbite-alert')
+
             <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Pelacakan Pesanan
                 #TRX{{ str_pad($transaksi->id_transaksi, 8, '0', STR_PAD_LEFT) }}</h2>
 

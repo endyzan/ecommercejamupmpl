@@ -1,8 +1,12 @@
 @extends('layout', ['title' => 'Product Detail'])
 
 @section('page-content')
-    <section class="py-8 mt-[12vh] bg-white md:py-16 antialiased">
+    <div id="top">
+        @include('components.flowbite-alert')
+
         <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
+            <h1 class="pl-4 text-2xl font-bold mb-4">Detail Produk</h1>
+
             <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
                 <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
                     <img class="w-full" src="{{ asset('assets/images/products/' . $jamu->gambar) }}" alt="" />
@@ -95,7 +99,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
 
     @include('product.components.comments')

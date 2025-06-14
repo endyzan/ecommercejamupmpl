@@ -2,27 +2,42 @@
 
 @section('page-content')
     <section id="top" class="bg-white py-8 antialiased md:py-16">
+        {{-- Load Alert --}}
+        @include('components.flowbite-alert')
+
         <form action="{{ route('pesanan.submit', $transaksi->id_transaksi) }}" method="POST"
             class="mx-auto max-w-screen-xl px-4 2xl:px-0">
             @csrf
             <div class="mt-6 space-y-4 border-b border-t border-gray-200 py-8 sm:mt-8">
                 <h4 class="text-lg font-semibold text-gray-900">Informasi Penagihan & Pengiriman</h4>
 
-                <label for="alamat-select" class="block mb-2 text-sm font-medium text-gray-700">Pilih Alamat Anda</label>
-                <select id="alamat-select" name="alamat_id"
-                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                    @forelse($alamatUser as $alamat)
-                        <option value="{{ $alamat->id_alamat }}"
-                            {{ $transaksi->user->alamat && $transaksi->user->alamat->id_alamat === $alamat->id_alamat ? 'selected' : '' }}>
-                            {{ $alamat->alamat }}
-                        </option>
-                    @empty
-                        <option disabled>Alamat belum tersedia</option>
-                    @endforelse
-                </select>
+                @if ($transaksi->status_pembayaran == 0)
+                    <label for="alamat-select" class="block mb-2 text-sm font-medium text-gray-700">Pilih Alamat Anda</label>
+                    <select id="alamat-select" name="alamat_id"
+                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
+                        @forelse($alamatUser as $alamat)
+                            <option value="{{ $alamat->id_alamat }}"
+                                {{ $transaksi->user->alamat && $transaksi->user->alamat->id_alamat === $alamat->id_alamat ? 'selected' : '' }}>
+                                {{ $alamat->alamat }}
+                            </option>
+                        @empty
+                            <option disabled>Alamat belum tersedia</option>
+                        @endforelse
+                        <option class="bg-gray-200" value="add-new">+ Tambah Alamat Baru</option>
+                    </select>
+                @else
+                    <p class="text-sm text-gray-500">Alamat: {{ $transaksi->user->alamat->alamat ?? 'Tidak ada alamat' }}
+                    </p>
+                @endif
             </div>
 
-
+            <script>
+                document.getElementById('alamat-select').addEventListener('change', function() {
+                    if (this.value === 'add-new') {
+                        window.location.href = "{{ route('profile.edit') }}";
+                    }
+                });
+            </script>
 
             <div class="mt-6 sm:mt-8">
                 <div class="relative overflow-x-auto border-b border-gray-200">

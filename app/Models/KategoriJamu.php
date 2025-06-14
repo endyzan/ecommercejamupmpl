@@ -12,6 +12,9 @@ class KategoriJamu extends Model
     // Nama tabel yang digunakan
     protected $table = 'kategori';
 
+    // Primary key dari tabel
+    protected $primaryKey = 'id_kategori';
+
     // Kolom yang dapat diisi (mass assignment)
     protected $fillable = ['nama_kategori'];
 

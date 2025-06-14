@@ -2,6 +2,15 @@
 
 @section('content')
     <div class="px-10 pt-20 w-full min-h-screen overflow-hidden">
+        {{-- Load Alert --}}
+        @include('components.flowbite-alert')
+
+        {{-- Load All Modal --}}
+        @foreach ($kategori as $k)
+            @include('admin.components.crud.deletecategorymodal')
+            @include('admin.components.crud.editcategorymodal')
+        @endforeach
+        @include('admin.components.crud.addcategorymodal')
         <div class="w-full lg:w-[80%] lg:mx-auto">
             <div class="w-full flex justify-end items-end py-3">
             </div>
@@ -26,17 +35,25 @@
                                     {{ $k->nama_kategori }}
                                 </th>
                                 <td class="px-6 py-4 flex items-end justify-end">
-                                    <a href="#"
-                                        class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-                                    <a href="#"
-                                        class="ml-2 font-medium text-red-600 dark:text-red-500 hover:underline">Delete</a>
+                                    <button data-modal-target="crud-{{ $k->id_kategori }}-modal"
+                                        data-modal-toggle="crud-{{ $k->id_kategori }}-modal"
+                                        class="mr-2 font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                                        type="button">
+                                        Edit
+                                    </button>
+                                    <button data-modal-target="popup-delete-{{ $k->id_kategori }}-modal"
+                                        data-modal-toggle="popup-delete-{{ $k->id_kategori }}-modal"
+                                        class="ml-2 font-medium text-red-600 dark:text-red-500 hover:underline"
+                                        type="button">
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
                 <div class="w-full flex justify-end items-end py-3">
-                    <button type="button"
+                    <button data-modal-target="crud-modal" data-modal-toggle="crud-modal" type="button"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Tambah Kategori
                     </button>

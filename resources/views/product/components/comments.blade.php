@@ -22,13 +22,14 @@
                     {{ $jamu->reviewers }} Ulasan </a>
             </div>
         </div>
-
         <div class="my-6 gap-8 sm:flex sm:items-start md:my-8">
             <div class="shrink-0 space-y-4">
                 <p class="text-2xl font-semibold leading-none text-gray-900">{{ $jamu->rating }} out of 5</p>
-                {{-- <button type="button" data-modal-target="review-modal" data-modal-toggle="review-modal"
-                    class="mb-2 me-2 rounded-lg bg-red-500 px-5 py-2.5 text-sm font-medium text-black hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">Write
-                    a review</button> --}}
+                <div class="pt-2">
+                    <a href="{{ route('pesanan.rating', $jamu->id_jamu) }}"
+                        class=" mb-2 me-2 rounded-lg bg-red-500 px-5 py-2.5 text-sm font-medium text-black hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300">Tulis
+                        Komentar</a>
+                </div>
             </div>
 
             <div class="mt-6 min-w-0 flex-1 space-y-3 sm:mt-0">
@@ -98,4 +99,5 @@
             Muat Ulasan</button>
     </div> --}}
     </div>
+
 </section>

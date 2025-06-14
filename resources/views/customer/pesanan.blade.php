@@ -3,6 +3,9 @@
 @section('page-content')
     <section id="top" class="bg-white py-8 antialiased">
         <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+            {{-- Load Alert --}}
+            @include('components.flowbite-alert')
+
             <div class="mx-auto max-w-5xl">
                 <div class="gap-4 sm:flex sm:items-center sm:justify-between">
                     <h2 class="text-xl font-semibold text-gray-900 sm:text-2xl">Pesanan Saya</h2>
@@ -96,6 +99,11 @@
                                         <a href="{{ route('pesanan.cancel', $order->id_transaksi) }}"
                                             class="w-full lg:text-[11.5px] text-sm inline-flex justify-center rounded-lg border border-gray-300 bg-red-500 px-3 py-2 font-medium text-gray-100 hover:bg-red-700 hover:text-white transition">
                                             Batalkan Pesanan
+                                        </a>
+                                    @elseif ($order->status_pembayaran == 3)
+                                        <a href="{{ route('pesanan.detail', $order->id_transaksi) }}"
+                                            class="w-full inline-flex justify-center rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 transition">
+                                            Lihat Detil
                                         </a>
                                     @else
                                         <a href="{{ route('pesanan.track', $order->id_transaksi) }}"

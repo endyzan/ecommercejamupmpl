@@ -29,7 +29,7 @@ class DetilTransaksi extends Model
     // Relasi ke model Jamu
     public function jamu()
     {
-        return $this->belongsTo(Jamu::class, 'id_jamu', 'id_jamu');
+        return $this->belongsTo(Jamu::class, 'id_jamu', 'id_jamu')->withTrashed();
     }
 
     // Relasi ke model Transaksi

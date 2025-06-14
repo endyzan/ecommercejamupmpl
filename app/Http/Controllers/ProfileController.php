@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Alamat;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
     {
         return view('profile.edit', [
             'user' => $request->user(),
+            'alamat' => Alamat::where('id_user', Auth::id())->get(),
         ]);
     }
 
@@ -56,5 +58,34 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    public function addAddress(Request $request)
+    {
+        $user_id = Auth::id();
+        $request->validate([
+            'alamat' => 'required|string|max:255',
+        ], [
+            'alamat.required' => 'Alamat tidak boleh kosong.',
+            'alamat.string' => 'Alamat harus berupa teks.',
+            'alamat.max' => 'Alamat tidak boleh lebih dari 255 karakter.',
+        ]);
+        Alamat::create([
+            'alamat' => $request->alamat,
+            'id_user' => Auth::id(),
+        ]);
+
+        return redirect()->back()->with('status', 'alamat-updated');
+    }
+
+    public function deleteAddress($id)
+    {
+        $alamat = Alamat::findOrFail($id);
+        if ($alamat->id_user !== Auth::id()) {
+            return redirect()->back()->withErrors(['error' => 'Hak Akses Diperlukan !']);
+        }
+        $alamat->delete();
+
+        return redirect()->back()->with('status', 'alamat-deleted');
     }
 }
