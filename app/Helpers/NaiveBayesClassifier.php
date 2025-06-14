@@ -12,7 +12,7 @@ class NaiveBayesClassifier
     {
         // Cache data jamu 1 jam
         $this->data = Cache::remember('jamu_data', 3600, function () {
-            return \App\Models\Jamu::select('id_jamu', 'nama_jamu', 'harga', 'manfaat', 'deskripsi', 'komposisi', 'fitur_index')
+            return \App\Models\Jamu::select('*')
                 ->where('stok', '>', 0)
                 ->get();
         });

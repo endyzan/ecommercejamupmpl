@@ -20,7 +20,13 @@ class ChatbotController extends Controller
 
         if ($result) {
             return response()->json([
-                'response' => "Saya merekomendasikan *{$result->nama_jamu}*. Manfaat: {$result->manfaat}. Harga: Rp" . number_format($result->harga)
+                'response' => "Saya merekomendasikan Jamu : ",
+                'nama_jamu' => $result->nama_jamu,
+                'manfaat' => $result->manfaat,
+                'harga' => rupiah($result->harga),
+                'komposisi' => $result->komposisi,
+                'deskripsi' => $result->deskripsi,
+                'gambar' => $result->gambar,
             ]);
         }
 

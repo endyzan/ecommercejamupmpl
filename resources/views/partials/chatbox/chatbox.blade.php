@@ -53,7 +53,10 @@
             </span>
             <p class="leading-relaxed">
                 <span class="block font-bold text-gray-700">AI </span>
-                Apa ada yang bisa saya bantu? Mohon masukkan data keluhan Anda.
+                Apa ada yang bisa saya bantu? Mohon masukkan data keluhan dan alergi Anda.
+                <br>
+                <span class="text-sm text-gray-500">Contoh: "Saya mengalami sakit kepala dan demam dan saya alergi
+                    jeruk."</span>
             </p>
         </div>
 
