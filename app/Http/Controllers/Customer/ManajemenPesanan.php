@@ -69,7 +69,7 @@ class ManajemenPesanan extends Controller
         $transaksi->status_pembayaran = 3; // Selesai
         $transaksi->save();
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sudah Diterima!');
     }
     public function cancelOrder(Request $request, $id)
     {
