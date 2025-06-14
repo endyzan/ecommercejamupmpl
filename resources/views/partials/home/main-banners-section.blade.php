@@ -1,5 +1,7 @@
     <!-- ***** Main Banner Area Start ***** -->
     <div id="top" style="padding-top: 0; margin-top: 0;">
+        {{-- Load Alert --}}
+        @include('components.flowbite-alert')
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-4">

@@ -28,8 +28,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if (Auth::user()->role == 1 || Auth::user()->role == 2) { // Admin & Manager
-            return redirect()->intended(route('panel', absolute: false));
+        if (Auth::user()->role == 2) { // Manager
+            return redirect()->intended(route('panel', absolute: false))->with('success', 'Selamat datang di panel manager ' . $request->user()->name . '!');
+        } else if (Auth::user()->role == 1) { // Admin
+            return redirect()->intended(route('panel.transactions', absolute: false))->with('success', 'Selamat datang di panel admin ' . $request->user()->name . '!');
+        } elseif (Auth::user()->role == 0) { // User
+            return redirect()->intended(route('home', absolute: false))->with('success', 'Selamat datang di aplikasi kami ' . $request->user()->name . '!');
         }
         return redirect()->intended(route('home', absolute: false));
     }

@@ -16,17 +16,19 @@
             <div
                 class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700 h-screen">
                 <ul class="pb-2 space-y-2">
-                    <li>
-                        <a href="{{ route('panel') }}"
-                            class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-                            <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
-                                <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
-                            </svg>
-                            <span class="ml-3" sidebar-toggle-item>Dashboard</span>
-                        </a>
-                    </li>
+                    @if (Auth::user()->role == 2)
+                        <li>
+                            <a href="{{ route('panel') }}"
+                                class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+                                <svg class="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                                    <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                                </svg>
+                                <span class="ml-3" sidebar-toggle-item>Dashboard</span>
+                            </a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ route('panel.transactions') }}"
                             class="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
@@ -73,18 +75,21 @@
                                     Kategori
                                 </a>
                             </li>
-                            <li>
-                                <a href="{{ route('panel.akunadmin') }}#"
-                                    class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 @if ($page_slug === 'users') bg-gray-100 dark:bg-gray-700 @endif">
-                                    Akun Admin
-                                </a>
-                            </li>
+                            @if (Auth::user()->role == 2)
+                                <li>
+                                    <a href="{{ route('panel.akunadmin') }}#"
+                                        class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 @if ($page_slug === 'users') bg-gray-100 dark:bg-gray-700 @endif">
+                                        Akun Admin
+                                    </a>
+                                </li>
+                            @endif
                             <li>
                                 <a href="{{ route('panel.akunuser') }}#"
                                     class="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 @if ($page_slug === 'users') bg-gray-100 dark:bg-gray-700 @endif">
                                     Akun User
                                 </a>
                             </li>
+
                         </ul>
                     </li>
                     {{-- <li>
@@ -100,32 +105,34 @@
                             <span class="ml-3" sidebar-toggle-item>Settings</span>
                         </a>
                     </li> --}}
-                    <li>
-                        <button type="button"
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                            aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
-                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Laporan</span>
-                            <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                        </button>
-                        <ul id="dropdown-pages" class="hidden py-2 space-y-2">
-                            <li>
-                                <a href="{{ route('panel.report') }}"
-                                    class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Laporan
-                                    Lengkap</a>
-                            </li>
-                        </ul>
-                    </li>
+                    @if (Auth::user()->role == 2)
+                        <li>
+                            <button type="button"
+                                class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
+                                aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
+                                <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Laporan</span>
+                                <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                            <ul id="dropdown-pages" class="hidden py-2 space-y-2">
+                                <li>
+                                    <a href="{{ route('panel.report') }}"
+                                        class="flex items-center p-2 text-base text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Laporan
+                                        Lengkap</a>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                     {{-- <li>
                         <button type="button"
                             class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
@@ -194,7 +201,7 @@
         {{-- menu yang terletak di paling bawah sidebar --}}
         <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 bg-white lg:flex dark:bg-gray-800"
             sidebar-bottom-menu>
-            <small class="text-white">@ Copyright To PAT M5 - 2025</small>
+            <small class="text-white">@ Copyright To PMPL - 2025</small>
             {{-- @include('admin.layouts.sidebar-footer') --}}
         </div>
 

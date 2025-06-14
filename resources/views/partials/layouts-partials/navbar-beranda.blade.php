@@ -19,8 +19,18 @@
                         <li class="scroll-to-section"><a href="{{ route('pesanan.index') }}">Pesananku</a></li>
                     @endif
 
-                    {{-- <li class="scroll-to-section"><a href="/#chefs">Chefs</a></li> --}}
                     <li class="scroll-to-section"><a href="/#reservation">Kontak</a></li>
+                    @if (Auth::user())
+                        @if (Auth::user()->role == 2)
+                            <li class="scroll-to-section"><a href="{{ route('panel') }}">Manager Panel</a></li>
+                        @endif
+                        @if (Auth::user()->role == 1)
+                            <li class="scroll-to-section"><a href="{{ route('panel.transactions') }}">Admin Panel</a>
+                            </li>
+                        @endif
+                    @endif
+                    {{-- <li class="scroll-to-section"><a href="/#chefs">Chefs</a></li> --}}
+
 
                     <?php
                     

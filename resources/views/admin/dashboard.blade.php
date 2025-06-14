@@ -6,6 +6,8 @@
 {{-- @section('container') --}}
 @section('content')
     <div class="p-0 mt-20 w-full overflow-hidden">
+        {{-- Load Alert --}}
+        @include('components.flowbite-alert')
         <div class="w-full">
             <!-- Main widget -->
             @include('admin.components.dashboard.main-chart')

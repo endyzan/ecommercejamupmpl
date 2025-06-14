@@ -82,9 +82,8 @@ Route::get('/panel/pengguna', [AkunUserCRUD::class, 'index'])->name('panel.akunu
 Route::delete('/panel/pengguna/{id}', [AkunUserCRUD::class, 'destroy'])->name('panel.akunuser.destroy');
 
 // RUTE BAWAAN LARAVEL ( HAPUS SAJA KALAU TIDAK DIPERLUKAN )
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PublicController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 
 
 require __DIR__ . '/auth.php';
