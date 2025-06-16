@@ -32,10 +32,3 @@ Manager :
 
 Customer :
 -> Bisa Register sendiri - sendiri
-
-
-user :
-andi
-andi aja
-andi@gmail.com
-andi1234
