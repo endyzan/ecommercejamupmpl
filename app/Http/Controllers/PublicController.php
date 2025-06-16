@@ -45,6 +45,16 @@ class PublicController extends Controller
             ->withCount('komentar')
             ->withAvg('komentar', 'rating');
 
+        // ✅ Filter berdasarkan pencarian nama jamu
+        if ($request->filled('search')) {
+            $searchTerm = $request->input('search');
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('nama_jamu', 'like', '%' . $searchTerm . '%')
+                ->orWhere('deskripsi', 'like', '%' . $searchTerm . '%');
+            });
+        }
+
+
         // ✅ Filter berdasarkan kategori dari kolom JSON `id_kategori`
         if ($request->filled('kategori')) {
             $kategori = (array) $request->input('kategori');
