@@ -4,6 +4,7 @@
     {{-- start-content --}}
 
     {{-- SEARCH --}}
+    
     <form id="top" class="flex items-center max-w-[70%] mx-auto mt-[1vh]" method="GET"
         action="{{ route('product.index') }}">
         <label for="simple-search" class="sr-only">Search</label>
@@ -15,9 +16,9 @@
                         d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
                 </svg>
             </div>
-            <input type="text" id="simple-search"
+            <input type="text" id="simple-search" name="search"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-red-500 focus:border-red-500 block w-full ps-10 p-2.5"
-                placeholder="Cari Jamu" required />
+                placeholder="Cari Jamu" value="{{ request('search') }}" required />
         </div>
         <button type="submit"
             class="p-[1.38vh] ms-2 text-sm font-medium text-white bg-red-500 hover:bg-red-800  rounded-lg border focus:ring-4 focus:outline-none focus:ring-red-300">
