@@ -85,8 +85,15 @@ class PublicController extends Controller
         // ✅ Filter berdasarkan rating jika ada input
         if ($request->filled('rating')) {
             $jamus = $jamus->filter(function ($jamu) use ($request) {
-                return $jamu->rating >= $request->input('rating');
-            })->values(); // reset index
+                return $jamu->rating <= $request->input('rating');
+            })
+            ->sort(function ($a, $b) {
+                if ($a->rating == $b->rating) {
+                    return 0;
+                }
+                return ($a->rating > $b->rating) ? -1 : 1; // Urutkan dari besar ke kecil
+            })
+            ->values(); // reset index
         }
 
         // ✅ Paginasi manual setelah filter

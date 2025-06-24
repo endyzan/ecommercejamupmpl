@@ -12,24 +12,11 @@
                 <h4 class="text-lg font-semibold text-gray-900">Informasi Penagihan & Pengiriman</h4>
 
                 @if ($transaksi->status_pembayaran == 0)
-                    <label for="alamat-select" class="block mb-2 text-sm font-medium text-gray-700">Pilih Alamat Anda</label>
-                    <select id="alamat-select" name="alamat_id"
-                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary-500 focus:ring-primary-500">
-                        @forelse($alamatUser as $alamat)
-                            <option value="{{ $alamat->id_alamat }}"
-                                {{ $transaksi->user->alamat && $transaksi->user->alamat->id_alamat === $alamat->id_alamat ? 'selected' : '' }}>
-                                {{ $alamat->alamat }}
-                            </option>
-                        @empty
-                            <option disabled>Alamat belum tersedia</option>
-                        @endforelse
-                        <option class="bg-gray-200" value="add-new">+ Tambah Alamat Baru</option>
-                    </select>
-                @else
                     <p class="text-sm text-gray-500">Alamat: {{ $transaksi->user->alamat->alamat ?? 'Tidak ada alamat' }}
                     </p>
                 @endif
             </div>
+            <input type="hidden" name="alamat_id" value="{{ $transaksi->id_alamat }}">
 
             <script>
                 document.getElementById('alamat-select').addEventListener('change', function() {

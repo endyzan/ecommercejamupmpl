@@ -29,7 +29,7 @@
     @include('partials.layouts-partials.navbar-beranda')
 
 
-    <div style="min-height:750px">
+    <div style="min-height:270px">
         {{-- @include('components.flowbite-alert') --}}
         @yield('page-content')
     </div>

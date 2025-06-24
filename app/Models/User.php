@@ -52,4 +52,10 @@ class User extends Authenticatable
     {
         return $this->hasOne(Alamat::class, 'id_user');
     }
+
+    public function alamatList()
+    {
+        return $this->hasMany(Alamat::class, 'id_user');
+    }
+
 }

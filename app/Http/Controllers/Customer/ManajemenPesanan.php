@@ -40,28 +40,22 @@ class ManajemenPesanan extends Controller
         ));
     }
 
-    public function submitOrder(Request $request, $id)
+    public function submitOrder($id)
     {
-        $transaksi = Transaksi::findOrFail($id);
+        $transaksi = Transaksi::where('id_transaksi', $id)
+            ->where('id_user', Auth::id())
+            ->firstOrFail();
 
-        if ($request->alamat == 'add-new') {
-            redirect()->route('profile.edit')->with('rutetambahalamat', 'Silakan tambahkan alamat baru anda.');
+        if ($transaksi->status_pembayaran != 0) {
+            return redirect()->back()->with('wrong', 'Pesanan ini sudah dibayar.');
         }
 
-        // Validasi jika perlu (contoh: checkbox harus dicentang)
-        $request->validate([
-            'alamat_id' => 'required|exists:alamat,id_alamat',
-        ]);
-
-        // Update alamat (jika ingin disimpan ke transaksi, misalnya tambah kolom `id_alamat`)
-        // $transaksi->id_alamat = $request->input('alamat_id');
-
-        // Ubah status pembayaran jadi 1 Dikemas
         $transaksi->status_pembayaran = 1;
         $transaksi->save();
 
-        return redirect()->route('pesanan.index')->with('success', 'Pesanan Sedang Di Proses!');
+        return redirect()->route('pesanan.index')->with('success', 'Pesanan berhasil dibayar.');
     }
+
     public function completeOrder(Request $request, $id)
     {
         $transaksi = Transaksi::findOrFail($id);

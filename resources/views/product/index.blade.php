@@ -51,11 +51,11 @@
         {{-- Filter Rating --}}
         <div>
             <label for="rating">Minimal Rating:</label>
-            <select name="rating" id="rating" class="border border-gray-300 rounded p-2">
+            <select name="rating" id="rating" class="border border-gray-300 rounded p-2" style="width: 200px";>
                 <option value="">Semua</option>
                 @for ($i = 1; $i <= 5; $i++)
                     <option value="{{ $i }}" {{ request('rating') == $i ? 'selected' : '' }}>{{ $i }}
-                        bintang ke atas</option>
+                        bintang ke bawah</option>
                 @endfor
             </select>
         </div>
@@ -112,7 +112,7 @@
                         @endif
                     </form>
                     <a class="absolute right-4 bottom-2 hover:text-red-700"
-                        href="{{ route('product.productDetail', $jamu->id_jamu) }}">></a>
+                        href="{{ route('product.productDetail', $jamu->id_jamu) }}">Lihat Detail</a>
                 </td>
             </tr>
         @endforeach

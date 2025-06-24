@@ -16,6 +16,8 @@ class ManajemenKeranjang extends Controller
     public function showCart(): View
     {
         $userId = Auth::id();
+        $user = Auth::user(); // Diperbaiki: Ambil user untuk alamat
+        $alamatUser = $user->alamatList ?? [];
 
         // Ambil keranjang milik user saat ini beserta data jamunya
         $cartItems = Keranjang::with('jamu')
@@ -63,14 +65,14 @@ class ManajemenKeranjang extends Controller
         $discount_price = 0; // Misalnya kupon diskon Rp 10.000
         $total_price = ($without_discount_price + $total_extra_charge) - $discount_price;
 
-
         return view('customer.keranjang', compact(
             'carts',
             'extra_charge',
             'total_price',
             'total_extra_charge',
             'without_discount_price',
-            'discount_price'
+            'discount_price',
+            'alamatUser'
         ));
     }
 
@@ -143,11 +145,20 @@ class ManajemenKeranjang extends Controller
         return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang.');
     }
 
-
-
     public function processCheckout(Request $request)
     {
         $userId = Auth::id();
+
+        $request->validate([
+            'alamat_id' => 'required|exists:alamat,id_alamat'
+        ]);
+
+        // Gunakan alamat_id untuk order baru
+        $alamatId = $request->input('alamat_id');
+
+        if ($alamatId === 'add-new') {
+            return redirect()->route('profile.edit')->with('info', 'Silakan tambah alamat terlebih dahulu.');
+        }
 
         // Ambil item keranjang user beserta data jamunya
         $cartItems = Keranjang::with('jamu')
@@ -176,6 +187,7 @@ class ManajemenKeranjang extends Controller
             $diskon = 0;
 
             $totalTransaksi = ($totalKeranjang + $biayaPengantaran + $pajak) - $diskon;
+
             // Buat transaksi
             $transaksi = Transaksi::create([
                 'tanggal_transaksi' => now(),

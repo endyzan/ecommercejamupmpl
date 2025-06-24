@@ -49,7 +49,14 @@ Route::middleware(['auth', 'forUser'])->group(function () {
     Route::post('/checkout', [ManajemenKeranjang::class, 'processCheckout'])->name('checkout.process');
     Route::put('/keranjang/update/{id_jamu}', [ManajemenKeranjang::class, 'update'])->name('keranjang.update');
     Route::delete('/keranjang/delete/{id_jamu}', [ManajemenKeranjang::class, 'delete'])->name('keranjang.delete');
+    // Ganti route checkout
+    Route::post('/checkout', [ManajemenKeranjang::class, 'processCheckout'])->name('checkout.process');
+    Route::post('/pesanan/create', [ManajemenPesanan::class, 'createOrder'])->name('pesanan.create');
+    Route::get('/payment/{id}', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::post('/payment/callback', [PaymentController::class, 'paymentCallback']);
 });
+
+
 
 // ROUTE UNTUK MANAGE PESANAN
 Route::middleware(['auth', 'forUser'])->group(function () {
